@@ -1,8 +1,26 @@
-# React + Vite
+# Yet Another Notes App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project was developed as part of the Patika Front End Bootcamp Week 10 assignment.
 
-Currently, two official plugins are available:
+## About the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Yet Another Notes App is an interactive application that allows users to create, edit, and delete notes. Users can also filter their notes and pick colors for better organization. The app's notes are saved in local storage, ensuring persistence across sessions.
+
+## Live Demo
+
+You can check out the live demo of this project [here](https://yet-another-notes-app.pages.dev).
+
+![Screen Recording](screen_recording.gif)
+
+## Features
+
+- Create and delete notes with a simple interface.
+- Search functionality to filter notes by text.
+- Color picker to customize note colors.
+- Completed notes can be toggled for better visibility.
+
+## Technologies Used
+
+- React
+- Tailwind CSS
+
