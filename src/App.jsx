@@ -43,7 +43,13 @@ function App() {
       <h1 className="text-2xl text-slate-600 font-bold mb-6">Yet Another Notes App</h1>
       <NoteInput handleAddNote={handleAddNote} />
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <NoteList notes={filteredNotes} handleDeleteNote={handleDeleteNote} handleToggleComplete={handleToggleComplete} />
+      <NoteList
+        notes={filteredNotes}
+        handleDeleteNote={(index) =>
+          handleDeleteNote(notes.findIndex((note) => note.text === filteredNotes[index].text))
+        }
+        handleToggleComplete={handleToggleComplete}
+      />
     </div>
   );
 }
