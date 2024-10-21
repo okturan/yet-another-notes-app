@@ -48,7 +48,12 @@ function App() {
         handleDeleteNote={(index) =>
           handleDeleteNote(notes.findIndex((note) => note.text === filteredNotes[index].text))
         }
-        handleToggleComplete={handleToggleComplete}
+        handleToggleComplete={(index) => {
+          const noteIndex = notes.findIndex((note) => note.text === filteredNotes[index].text);
+          if (noteIndex !== -1) {
+            handleToggleComplete(noteIndex);
+          }
+        }}
       />
     </div>
   );
