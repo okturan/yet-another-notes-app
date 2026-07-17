@@ -1,9 +1,12 @@
 function ColorPicker({ colorOptions, selectedColor, setSelectedColor }) {
   return (
     <div className="flex gap-2 items-center">
-      {colorOptions.map((color, index) => (
+      {colorOptions.map((color) => (
         <button
-          key={index}
+          key={color}
+          type="button"
+          aria-label={`Select ${color} note color`}
+          aria-pressed={selectedColor === color}
           onClick={() => setSelectedColor(color)}
           style={{
             backgroundColor: color,

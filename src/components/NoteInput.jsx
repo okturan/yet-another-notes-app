@@ -16,7 +16,7 @@ function NoteInput({ handleAddNote }) {
     <div className="mb-4">
       <textarea
         rows={7}
-        type="text"
+        aria-label="New note text"
         className="border p-2 w-full mb-2"
         value={newNote}
         onChange={(e) => setNewNote(e.target.value)}
@@ -24,7 +24,7 @@ function NoteInput({ handleAddNote }) {
       />
       <div className="flex justify-between">
         <ColorPicker colorOptions={colorOptions} selectedColor={selectedColor} setSelectedColor={setSelectedColor} />
-        <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleNoteAddition}>
+        <button type="button" className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleNoteAddition}>
           Add
         </button>
       </div>

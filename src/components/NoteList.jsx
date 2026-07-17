@@ -3,15 +3,15 @@ import NoteItem from "./NoteItem";
 function NoteList({ notes, handleDeleteNote, handleToggleComplete }) {
   return (
     <ul className="list-none p-0 mt-8">
-      {notes.map((note, index) => (
+      {notes.map((note) => (
         <NoteItem
-          key={index}
+          key={note.id}
           note={note}
-          index={index}
           handleDeleteNote={handleDeleteNote}
           handleToggleComplete={handleToggleComplete}
         />
       ))}
+      {notes.length === 0 && <li className="text-slate-500">No notes match your search.</li>}
     </ul>
   );
 }
