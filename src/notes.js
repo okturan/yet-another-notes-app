@@ -15,14 +15,24 @@ export function loadNotes(value, idFactory = createNoteId) {
   try {
     const parsed = JSON.parse(value);
     if (!Array.isArray(parsed)) return [];
+    const seenIds = new Set();
     return parsed
       .filter((note) => note && typeof note.text === "string" && note.text.trim())
-      .map((note) => ({
-        id: typeof note.id === "string" && note.id ? note.id : idFactory(),
-        text: note.text,
-        isCompleted: Boolean(note.isCompleted),
-        color: typeof note.color === "string" && note.color ? note.color : DEFAULT_COLOR,
-      }));
+      .map((note) => {
+        let id = typeof note.id === "string" && note.id && !seenIds.has(note.id) ? note.id : idFactory();
+        let fallbackSequence = 1;
+        while (seenIds.has(id)) {
+          id = `migrated-${seenIds.size + fallbackSequence}`;
+          fallbackSequence += 1;
+        }
+        seenIds.add(id);
+        return {
+          id,
+          text: note.text.trim(),
+          isCompleted: Boolean(note.isCompleted),
+          color: typeof note.color === "string" && note.color ? note.color : DEFAULT_COLOR,
+        };
+      });
   } catch {
     return [];
   }
