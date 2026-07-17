@@ -14,6 +14,19 @@ test("legacy notes receive stable IDs and malformed storage recovers safely", ()
   assert.deepEqual(loadNotes(JSON.stringify({ text: "not an array" })), []);
 });
 
+test("duplicate stored IDs are repaired so actions stay independently addressable", () => {
+  const repaired = loadNotes(
+    JSON.stringify([
+      { id: "shared", text: "First duplicate", color: "Salmon" },
+      { id: "shared", text: "Second duplicate", color: "CornflowerBlue" },
+    ]),
+    () => "replacement",
+  );
+
+  assert.deepEqual(repaired.map(({ id }) => id), ["shared", "replacement"]);
+  assert.deepEqual(toggleNote(repaired, "replacement").map(({ isCompleted }) => isCompleted), [false, true]);
+});
+
 test("duplicate note text does not confuse filtered toggle or delete actions", () => {
   const notes = [
     { id: "first", text: "Same note", isCompleted: false, color: "Salmon" },

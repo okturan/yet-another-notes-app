@@ -10,7 +10,14 @@ Yet Another Notes App is an interactive application that allows users to create,
 
 You can check out the live demo of this project [here](https://yet-another-notes-app.pages.dev).
 
-![Screen Recording](screen_recording.gif)
+![Current notes workspace showing duplicate-safe filtering and completion](docs/screenshots/notes-workspace.png)
+
+<details>
+<summary>Original interaction recording</summary>
+
+![Original screen recording](screen_recording.gif)
+
+</details>
 
 ## Features
 
@@ -23,7 +30,11 @@ You can check out the live demo of this project [here](https://yet-another-notes
 
 ## Verified behavior
 
-The dependency-free rule suite covers legacy storage migration, malformed-data recovery, duplicate-text filtering, targeted completion/deletion, input trimming, and blank-note rejection.
+The dependency-free rule suite covers legacy storage migration, malformed-data recovery, duplicate-ID repair, duplicate-text filtering, targeted completion/deletion, input trimming, and blank-note rejection.
+
+### Persistence model
+
+Notes are stored under the browser-local `notes` key as JSON objects containing a stable ID, text, completion state, and color. Loading is defensive: non-array or malformed JSON becomes an empty collection, invalid entries are discarded, whitespace is normalized, legacy entries receive IDs, and duplicate stored IDs are repaired. Filtering returns views of the same stable objects, so completing or deleting one same-text note cannot mutate its neighbor. No account, network database, analytics, or cross-device synchronization is involved.
 
 ```sh
 npm ci
